@@ -1,0 +1,185 @@
+:root {
+    /* Text */
+    --color-text: #333333;
+
+    /* Headings */
+    --color-heading: #111111;
+    --color-header: #ffffff;
+
+    /* Background */
+    --color-bg: #f7f9fa;
+
+    /* Cards */
+    --color-card: #ffffff;
+
+    /* Buttons */
+    --color-primary: #1a73e8;
+
+    /* Borders */
+    --color-border: #e0e0e0;
+
+    --color-black: #000;
+    --color-white: #FFF;
+
+    /* Font */
+    --font-ui: 'Inter', 'Roboto', sans-serif;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--color-bg);
+}
+
+/* 🌙 Dark Theme */
+body.dark {
+    --color-text: #e0e0e0;
+    /* svetla siva za tekst */
+    --color-heading: #ffffff;
+    --color-header: #1c1c1c;
+    /* skoro bela za naslove */
+
+    --color-bg: #121212;
+    /* tamna pozadina */
+    --color-card: #1e1e1e;
+    /* kartice malo svetlije od bg */
+
+    --color-primary: #8ab4f8;
+    /* primary prilagođen tamnoj temi */
+
+    --color-border: #333333;
+    /* suptilne linije */
+
+    --color-black: #000;
+    --color-white: #fff;
+}
+
+/* Header Style */
+
+.header {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-header);
+}
+
+.header .header-container {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 1rem;
+}
+
+.header .title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--color-heading);
+}
+
+.header .description {
+    color: var(--color-text);
+    font-size: 1rem;
+}
+
+.header .header-functions {
+    display: flex;
+    justify-content: end;
+    width: 50%;
+    align-items: center;
+}
+
+.header .header-functions>* {
+    margin-left: 1rem;
+}
+
+.header .header-functions> :first-child {
+    margin-left: 0;
+}
+
+.header .search-container #search {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.header .search-container #search::placeholder {
+    color: var(--color-text);
+}
+
+.header button {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.header button svg {
+    margin-right: 0.5rem;
+    color: var(--color-text);
+}
+
+.header button:hover {
+    border-color: var(--color-text);
+}
+
+.header .search-container #search:active,
+.header .search-container #search:focus-visible {
+    border-color: var(--color-heading);
+    outline: none;
+}
+
+.header .theme-switch-container {
+    position: relative;
+    width: 50px;
+    height: 24px;
+}
+
+.header .theme-switch-container input {
+    display: none;
+}
+
+.header .theme-switch-container label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header .theme-switch-container label::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: var(--color-white);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.header .theme-switch-container input:checked+label {
+    background-color: #FFC107;
+}
+
+.header .theme-switch-container input:checked+label::after {
+    transform: translateX(26px);
+}
