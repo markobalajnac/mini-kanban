@@ -12,8 +12,9 @@
     /* Cards */
     --color-card: #ffffff;
 
-    /* Buttons */
-    --color-primary: #1a73e8;
+    /* Button hover */
+
+    --button-hover: #ebedef;
 
     /* Borders */
     --color-border: #e0e0e0;
@@ -46,7 +47,12 @@ button {
 }
 
 button:hover {
-    border-color: var(--color-text);
+    background-color: var(--button-hover);
+    border-color: var(--color-border);
+}
+
+input::placeholder {
+    color: var(--color-text);
 }
 
 body {
@@ -57,24 +63,22 @@ body {
 /* 🌙 Dark Theme */
 body.dark {
     --color-text: #e0e0e0;
-    /* svetla siva za tekst */
+
     --color-heading: #ffffff;
     --color-header: #1c1c1c;
-    /* skoro bela za naslove */
 
     --color-bg: #121212;
-    /* tamna pozadina */
-    --color-card: #1e1e1e;
-    /* kartice malo svetlije od bg */
 
-    --color-primary: #8ab4f8;
-    /* primary prilagođen tamnoj temi */
+    --color-card: #1e1e1e;
+
+
+
+    /* Button hover */
+
+    --button-hover: #1c1c1c;
 
     --color-border: #333333;
-    /* suptilne linije */
 
-    --color-black: #000;
-    --color-white: #fff;
 }
 
 /* Header Style */
@@ -135,9 +139,7 @@ body.dark {
     background-color: var(--color-bg);
 }
 
-.header .search-container #search::placeholder {
-    color: var(--color-text);
-}
+
 
 .add-column-btn,
 .modal .export-data button,
@@ -154,11 +156,8 @@ body.dark {
     color: var(--color-text);
 }
 
-.modal .export-data button:hover,
-.header button:hover {
-    border-color: var(--color-text);
-}
 
+input:focus-visible,
 .header .search-container #search:active,
 .header .search-container #search:focus-visible {
     border-color: var(--color-heading);
@@ -247,6 +246,10 @@ body.dark {
     /* Could be more or less, depending on screen size */
 }
 
+.modal-content.modal-xs {
+    width: 30%;
+}
+
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -255,12 +258,12 @@ body.dark {
     position: relative;
 }
 
-.modal .modal-title h2 {
+.modal .modal-title-wrapper h2 {
     font-size: 20px;
     color: var(--color-heading);
 }
 
-.modal .modal-title .modal-description {
+.modal .modal-title-wrapper .modal-description {
     font-size: 14px;
     color: var(--color-text);
 }
@@ -321,6 +324,7 @@ body.dark {
 
 #confirm-reset {
     background-color: #b30000;
+    border-color: #b30000;
     color: #fff;
 }
 
@@ -328,8 +332,13 @@ body.dark {
     background-color: #800000;
 }
 
-#cancel-reset {
-    background-color: var(--color-bg);
+
+.modal .modal-body label {
+    color: var(--color-heading);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
 }
 
 /* Add Column Style */
@@ -339,18 +348,23 @@ body.dark {
 
 }
 
+
+.btn.add,
 .add-column-btn {
     background-color: var(--color-heading);
     color: var(--color-header);
+}
+
+.btn.add:hover,
+.add-column-btn:hover {
+    background-color: var(--color-text);
+    border-color: var(--color-bg);
 }
 
 .add-column-btn svg {
     color: var(--color-bg);
 }
 
-.add-column-btn:hover {
-    border-color: var(--color-bg);
-}
 
 @media (max-width: 1000px) {
 
@@ -402,6 +416,7 @@ body.dark {
 
     /* Modals */
 
+    .modal-content.modal-xs,
     .modal-content {
         width: 80%;
     }
@@ -419,7 +434,7 @@ body.dark {
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 600px) {
     .add-column-btn {
         border-radius: 50%;
         padding: 1rem;

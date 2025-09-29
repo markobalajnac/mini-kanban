@@ -86,12 +86,12 @@
 
 
 
-    <!-- Modal content -->
-    <div id="settings-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <!-- Modal content for Settings-->
+    <div id="settings-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">
-                    <h2>Board Settings</h2>
+                <div class="modal-title-wrapper">
+                    <h2 class="modal-title">Board Settings</h2>
                     <span class="modal-description">Configure your board settings</span>
                 </div>
                 <span class="close">&times;</span>
@@ -126,6 +126,27 @@
                     </div>
 
 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-column-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content modal-xs">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <h2 class="modal-title">Add New Column</h2>
+                    <span class="modal-description">Create a new column for organizing cards.</span>
+                </div>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <label for="columnName">Column Title</label>
+                <input type="text" id="columnName" name="columnName" placeholder="Enter column title">
+
+                <div class="confirm-buttons">
+                    <button type="button" class="btn cancel">Cancel</button>
+                    <button type="button" class="btn add">Add Column</button>
                 </div>
             </div>
         </div>
