@@ -139,6 +139,7 @@ body.dark {
     color: var(--color-text);
 }
 
+.add-column-btn,
 .modal .export-data button,
 .header button {
     display: flex;
@@ -146,6 +147,7 @@ body.dark {
     justify-content: center;
 }
 
+.add-column-btn svg,
 .modal .export-data button svg,
 .header button svg {
     margin-right: 0.5rem;
@@ -330,6 +332,25 @@ body.dark {
     background-color: var(--color-bg);
 }
 
+/* Add Column Style */
+.add-column-container {
+    display: flex;
+    justify-content: end;
+
+}
+
+.add-column-btn {
+    background-color: var(--color-heading);
+    color: var(--color-header);
+}
+
+.add-column-btn svg {
+    color: var(--color-bg);
+}
+
+.add-column-btn:hover {
+    border-color: var(--color-bg);
+}
 
 @media (max-width: 1000px) {
 
@@ -339,6 +360,10 @@ body.dark {
 
     button {
         letter-spacing: 0;
+    }
+
+    .header-wrapper {
+        position: relative;
     }
 
     .header .menu-toggle {
@@ -383,5 +408,28 @@ body.dark {
 
     .modal input {
         width: 100%;
+    }
+
+    /* Add column style */
+    .add-column-container {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 5rem;
+    }
+}
+
+@media (max-width: 1000px) {
+    .add-column-btn {
+        border-radius: 50%;
+        padding: 1rem;
+    }
+
+    .add-column-btn span {
+        display: none;
+    }
+
+    .add-column-btn svg {
+        margin-right: 0;
     }
 }
