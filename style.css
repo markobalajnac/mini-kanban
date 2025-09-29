@@ -32,6 +32,23 @@
     box-sizing: border-box;
 }
 
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    border-color: var(--color-text);
+}
+
 body {
     font-family: var(--font-ui);
     background-color: var(--color-bg);
@@ -100,6 +117,7 @@ body.dark {
     margin-left: 0;
 }
 
+.modal input,
 .header .search-container #search {
     padding: 0.5rem 1rem;
     background-color: var(--color-bg);
@@ -109,30 +127,32 @@ body.dark {
     transition: all 0.3s ease;
 }
 
+::file-selector-button {
+    border: none;
+    color: var(--color-heading);
+    font-size: 12px;
+    margin-right: 10px;
+    background-color: var(--color-bg);
+}
+
 .header .search-container #search::placeholder {
     color: var(--color-text);
 }
 
+.modal .export-data button,
 .header button {
-    padding: 0.5rem 1rem;
-    background-color: var(--color-bg);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    letter-spacing: 1px;
 }
 
+.modal .export-data button svg,
 .header button svg {
     margin-right: 0.5rem;
     color: var(--color-text);
 }
 
+.modal .export-data button:hover,
 .header button:hover {
     border-color: var(--color-text);
 }
@@ -182,4 +202,186 @@ body.dark {
 
 .header .theme-switch-container input:checked+label::after {
     transform: translateX(26px);
+}
+
+.header .menu-toggle {
+    display: none;
+}
+
+.header .menu-toggle svg {
+    margin: 0;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: var(--color-header);
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    width: 60%;
+    /* Could be more or less, depending on screen size */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.modal .modal-title h2 {
+    font-size: 20px;
+    color: var(--color-heading);
+}
+
+.modal .modal-title .modal-description {
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+.modal .close {
+    color: var(--color-heading);
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal .close:hover,
+.modal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal h3 {
+    font-size: 16px;
+    color: var(--color-heading);
+}
+
+.modal .modal-body p {
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: var(--color-text);
+}
+
+.modal .modal-body>* {
+    margin-bottom: 20px;
+}
+
+.modal .modal-body> :last-child {
+    margin-bottom: 0;
+}
+
+.warning {
+    background: #ffe6e6;
+    color: #b30000;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.reset-buttons {
+    margin-top: 10px;
+}
+
+#confirm-reset {
+    background-color: #b30000;
+    color: #fff;
+}
+
+#confirm-reset:hover {
+    background-color: #800000;
+}
+
+#cancel-reset {
+    background-color: var(--color-bg);
+}
+
+
+@media (max-width: 1000px) {
+
+    html {
+        font-size: 14px;
+    }
+
+    button {
+        letter-spacing: 0;
+    }
+
+    .header .menu-toggle {
+        display: block;
+    }
+
+    .header button {
+        font-size: 12px;
+    }
+
+    .header .header-functions {
+        display: none;
+        /* Hide navigation on smaller screens */
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        left: 0;
+        width: 100%;
+        justify-content: start;
+        align-items: start;
+        margin: 0;
+        background: var(--color-header);
+        border: 1PX SOLID var(--color-border);
+        padding: 1rem;
+    }
+
+    .header .header-functions>* {
+        margin: 0 0 1rem 0;
+
+    }
+
+    .header .search-container #search,
+    .header .header-functions .search-container {
+        width: 100%;
+    }
+
+    /* Modals */
+
+    .modal-content {
+        width: 80%;
+    }
+
+    .modal input {
+        width: 100%;
+    }
 }

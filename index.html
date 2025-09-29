@@ -16,6 +16,14 @@
                 <h1 class="title">Project Board</h1>
                 <span class="description">Manage your tasks and workflow</span>
             </div>
+            <button class="menu-toggle" aria-label="Open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50"
+                    fill="currentColor">
+                    <path stroke="currentColor"
+                        d="M 3 9 A 1.0001 1.0001 0 1 0 3 11 L 47 11 A 1.0001 1.0001 0 1 0 47 9 L 3 9 z M 3 24 A 1.0001 1.0001 0 1 0 3 26 L 47 26 A 1.0001 1.0001 0 1 0 47 24 L 3 24 z M 3 39 A 1.0001 1.0001 0 1 0 3 41 L 47 41 A 1.0001 1.0001 0 1 0 47 39 L 3 39 z">
+                    </path>
+                </svg>
+            </button>
             <div class="header-functions">
                 <div class="search-container">
                     <input type="text" id="search" placeholder="Search tasks..." aria-label="Search tasks" />
@@ -62,6 +70,53 @@
             </div>
         </div>
     </header>
+
+    <!-- Modal content -->
+    <div id="settings-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <h2>Board Settings</h2>
+                    <span class="modal-description">Configure your board settings</span>
+                </div>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="export-data">
+                    <h3>Export Board Data</h3>
+                    <p>Download all your boards, cards and settings as a JSON file</p>
+                    <button id="export-json">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32">
+                            <path fill="currentColor"
+                                d="M6 4v24h20v-8l-2 2v4H8V6h16v4l2 2V4H6zm16.406 7L21 12.406L23.563 15h-9.657v2h9.656L21 19.594L22.406 21l4.313-4.28l.686-.72l-.687-.72L22.405 11z" />
+                        </svg>
+                        Export Data
+                    </button>
+                </div>
+
+                <div class="import-data">
+                    <h3>Import Board Data</h3>
+                    <p>Imports boards and data from a JSON file. This wiil replace your current data.</p>
+                    <input type="file" accept=".json,application/json" aria-label="Upload JSON file">
+                </div>
+
+                <div class="reset-data">
+                    <button id="reset-board">Reset Board</button>
+                    <div id="reset-warning" class="hidden warning">
+                        This will delete all boards, cards, and settings permanently.
+                        <div class="reset-buttons ">
+                            <button id="confirm-reset">Confirm Reset</button>
+                            <button id="cancel-reset">Cancel</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 
 </html>
