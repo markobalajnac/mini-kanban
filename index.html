@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Kanban</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -72,7 +71,7 @@
             </div>
         </header>
         <div class="add-column-container">
-            <button class="add-column-btn" data-modal-id="add-column-modal" aria-label="Add new column">
+            <button class="add-column-btn" data-modal-id="column-add-modal" aria-label="Add new column">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
@@ -86,11 +85,7 @@
         <div class="columns-wrapper flex-row">
             <div class="column flex-item to-do">
                 <div class="column-header">
-                    <div class="title-color-wrapper">
-                        <span class="color"></span>
-                        <h4 class="title">To Do</h4>
-                    </div>
-
+                    <h4 class="title">To Do</h4>
                     <div class="options">
                         <div class="dropdown">
                             <button class="dropbtn" aria-haspopup="true" aria-expanded="false"
@@ -120,10 +115,7 @@
 
             <div class="column flex-item progress">
                 <div class="column-header">
-                    <div class="title-color-wrapper">
-                        <span class="color"></span>
-                        <h4 class="title">In Progress</h4>
-                    </div>
+                    <h4 class="title">In Progress</h4>
                     <div class="options">
                         <div class="dropdown">
                             <button class="dropbtn" aria-haspopup="true" aria-expanded="false"
@@ -155,10 +147,7 @@
 
             <div class="column flex-item done">
                 <div class="column-header">
-                    <div class="title-color-wrapper">
-                        <span class="color"></span>
-                        <h4 class="title">Done</h4>
-                    </div>
+                    <h4 class="title">Done</h4>
                     <div class="options">
                         <div class="dropdown">
                             <button class="dropbtn" aria-haspopup="true" aria-expanded="false"
@@ -243,7 +232,7 @@
 
     <!-- Modal content for Add Columns-->
 
-    <div id="add-column-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="column-add-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content modal-xs">
             <div class="modal-header">
                 <div class="modal-title-wrapper">
@@ -264,9 +253,43 @@
         </div>
     </div>
 
+    <!-- Template for Column -->
+    <template id="column-template">
+        <div class="column flex-item">
+            <div class="column-header">
+                <div class="title-color-wrapper">
+                    <span class="color"></span>
+                    <h4 class="title">Nova kolona</h4>
+                </div>
+                <div class="options">
+                    <div class="dropdown">
+                        <button class="dropbtn" aria-haspopup="true" aria-expanded="false" aria-label="Options menu">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path fill="currentColor" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 5.92A.96.96 0 1 0 12 4a.96.96 0 0 0 0 1.92m0 7.04a.96.96 0 1 0 0-1.92a.96.96 0 0 0 0 1.92M12 20a.96.96 0 1 0 0-1.92a.96.96 0 0 0 0 1.92" />
+                            </svg>
+                        </button>
+                        <div class="dropdown-content" role="menu" aria-label="Options">
+                            <a href="#" role="menuitem">Edit</a>
+                            <a href="#" role="menuitem">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column-body">
+                <div class="placeholder show">Drop items here</div>
+            </div>
+            <div class="column-footer">
+                <button class="add-card-btn" aria-label="Add new card">Add Card</button>
+            </div>
+        </div>
+    </template>
+
     <script src="scripts/darkMode.js" defer></script>
     <script src="scripts/menu.js" defer></script>
     <script src="scripts/modal.js" defer></script>
+    <script src="scripts/app.js" defer></script>
 </body>
 
 </html>
