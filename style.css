@@ -554,11 +554,10 @@ body.dark .dropbtn:hover {
     }
 
     .header .header-functions {
-        display: none;
         /* Hide navigation on smaller screens */
         flex-direction: column;
         position: absolute;
-        top: 90px;
+        top: 100%;
         left: 0;
         width: 100%;
         justify-content: start;
@@ -567,6 +566,15 @@ body.dark .dropbtn:hover {
         background: var(--color-header);
         border: 1PX SOLID var(--color-border);
         padding: 1rem;
+        z-index: 10;
+        max-height: 0;
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+
+    .header .header-functions.active {
+        max-height: 500px;
+        opacity: 1;
     }
 
     .header .header-functions>* {
