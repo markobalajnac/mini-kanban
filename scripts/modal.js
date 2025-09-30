@@ -7,11 +7,11 @@ const toggleModal = (modalId) => {
 
     modalContent.addEventListener('click', (e) => {
         e.stopPropagation();
+        if (e.target.matches('.close') || e.target.matches('.cancel')) {
+            modal.classList.remove('active')
+        }
     });
 
-    modalCloseBtn.addEventListener('click', () => {
-        modal.classList.remove('active')
-    })
 
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {

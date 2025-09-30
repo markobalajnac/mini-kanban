@@ -16,6 +16,8 @@ addColumntBtn.addEventListener('click', () => {
         const clone = columnTemplate.content.cloneNode(true);
         clone.querySelector('.title').textContent = columnName;
         board.appendChild(clone);
+        addColumnInput.value = "";
+
     } else {
         alert('Enter column title!')
     }
