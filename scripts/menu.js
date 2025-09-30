@@ -1,7 +1,6 @@
 const menuButton = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.header-functions');
 
-console.log(menuButton);
 
 if (menu && menuButton) {
     menuButton.addEventListener('click', (e) => {

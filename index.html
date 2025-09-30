@@ -51,7 +51,7 @@
 
                     </div>
                     <div class="settings-container">
-                        <button id="settingsBtn" aria-label="Open Settings Modal">
+                        <button id="settingsBtn" class="settings-modal" aria-label="Open Settings Modal">
                             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path
@@ -72,7 +72,7 @@
             </div>
         </header>
         <div class="add-column-container">
-            <button class="add-column-btn" aria-label="Add new column">
+            <button class="add-column-btn" data-modal-id="add-column-modal" aria-label="Add new column">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
@@ -265,7 +265,8 @@
     </div>
 
     <script src="scripts/darkMode.js" defer></script>
-    <script src="scripts/menu.js"></script>
+    <script src="scripts/menu.js" defer></script>
+    <script src="scripts/modal.js" defer></script>
 </body>
 
 </html>
