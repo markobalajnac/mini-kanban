@@ -399,6 +399,8 @@ input:focus-visible,
     border-radius: 5px;
     padding: 1rem;
     background-color: var(--color-header);
+    display: flex;
+    flex-direction: column;
 
 }
 
@@ -406,6 +408,7 @@ input:focus-visible,
     min-height: 200px;
     max-height: 600px;
     overflow-y: auto;
+    flex: 1;
 }
 
 .column-body:has(.placeholder.show) {
@@ -503,6 +506,7 @@ body.dark .dropbtn:hover {
     font-size: 14px;
     text-align: center;
     flex: 1;
+    border: 2px dotted var(--color-border);
 }
 
 .column-footer button {
