@@ -27,7 +27,17 @@ const addColumnModal = document.querySelector('.add-column-btn');
 const addCardModalBtns = document.querySelectorAll('.add-card-btn');
 
 addColumnModal.addEventListener('click', (e) => {
-    toggleModal(e.currentTarget.dataset.modalId)
+
+    const modal = document.getElementById(e.currentTarget.dataset.modalId);
+    const input = modal.querySelector('input');
+    const addBtn = modal.querySelector('.add');
+
+    input.value = '';
+    addBtn.textContent = 'Add Column';
+    modal.dataset.mode = 'add';
+    modal.dataset.currentId = '';
+
+    toggleModal(modal.id);
 
 })
 

@@ -58,3 +58,11 @@ export function removeColumn(columnId) {
     state.columns = state.columns.filter(c => c.id !== columnId);
     saveState();
 }
+
+export function editColumn(columnId, newTitle) {
+    const column = state.columns.find(c => c.id === columnId);
+    if (!column) return;
+
+    column.title = newTitle;
+    saveState();
+}
