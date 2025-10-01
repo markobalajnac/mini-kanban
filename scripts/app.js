@@ -5,8 +5,8 @@ const addColumntBtn = document.querySelector('#column-add-modal .add');
 const columnTemplate = document.querySelector('#column-template')
 const board = document.querySelector('.columns-wrapper');
 
-console.log(addColumnInput);
-console.log(addColumntBtn);
+// console.log(addColumnInput);
+// console.log(addColumntBtn);
 
 addColumntBtn.addEventListener('click', () => {
     const columnName = addColumnInput.value;
