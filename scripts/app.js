@@ -1,5 +1,5 @@
 //Adding Column Template
-import { state, subscribe, addColumn, removeColumn, editColumn, clearState } from './state.js';
+import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard } from './state.js';
 
 
 const columnTemplate = document.querySelector('#column-template')
@@ -74,8 +74,6 @@ const openModal = () => {
     });
 }
 
-
-
 const updateColumn = () => {
     const modalAdd = document.getElementById('column-add-modal');
     const addBtn = modalAdd.querySelector('.add');
@@ -107,10 +105,32 @@ const resetBoard = () => {
     })
 }
 
+const exportJSON = () => {
+    const exportBtn = document.querySelector('#export-json');
+    exportBtn.addEventListener('click', () => {
+        if (confirm('Do you want to download a JSON file?')) {
+            exportBoard();
+        }
+    })
+}
+
+const importJSON = () => {
+    const importInput = document.querySelector('.import-data input');
+    importInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            importBoard(e.target.files[0]);  // učitavamo izabrani fajl
+            e.target.value = '';             // reset input za sledeći import
+        }
+    });
+}
+
 resetBoard();
 openModal();
-updateColumn();
 addNewColumn();
+updateColumn();
+exportJSON();
+importJSON();
+
 
 
 subscribe(renderBoard);

@@ -72,3 +72,38 @@ export function clearState() {
 
     saveState();
 }
+
+export function exportBoard() {
+    const dataStr = JSON.stringify(state, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'kanban-board.json';
+    a.click();
+
+    URL.revokeObjectURL(url);
+}
+
+export function importBoard(file) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        try {
+            const importedState = JSON.parse(e.target.result);
+
+
+            if (!importedState.columns || !Array.isArray(importedState.columns)) {
+                throw new Error('Invalid file format');
+            }
+
+            state = importedState;
+            saveState();
+        } catch (err) {
+            alert('Failed to import board: ' + err.message);
+        }
+    };
+
+    reader.readAsText(file);
+}
