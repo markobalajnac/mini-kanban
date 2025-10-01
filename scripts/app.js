@@ -1,4 +1,5 @@
 //Adding Column Template
+import { state, subscribe, addColumn } from './state.js';
 
 const addColumnInput = document.querySelector('#columnName');
 const addColumntBtn = document.querySelector('#column-add-modal .add');
@@ -9,20 +10,25 @@ const board = document.querySelector('.columns-wrapper');
 // console.log(addColumntBtn);
 
 addColumntBtn.addEventListener('click', () => {
-    const columnName = addColumnInput.value;
-    console.log(columnName);
-
-    if (columnName) {
-        const clone = columnTemplate.content.cloneNode(true);
-        clone.querySelector('.title').textContent = columnName;
-        board.appendChild(clone);
-        addColumnInput.value = "";
-
-    } else {
-        alert('Enter column title!')
-    }
-
+    addColumn(addColumnInput.value.trim())
 })
+
+const renderBoard = (state) => {
+    board.innerHTML = '';
+    state.columns.forEach(column => {
+        const clone = columnTemplate.content.cloneNode(true);
+        const cloneItem = clone.querySelector('.column');
+        cloneItem.dataset.id = column.id;
+        cloneItem.querySelector('.title').textContent = column.title;
+        board.appendChild(clone);
+    });
+}
+
+
+subscribe(renderBoard);
+renderBoard(state);
+
+
 
 
 
