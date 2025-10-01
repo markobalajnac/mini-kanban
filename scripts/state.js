@@ -107,3 +107,21 @@ export function importBoard(file) {
 
     reader.readAsText(file);
 }
+
+export function addCard(columnId, title, description, priority = "low", dueDate = null) {
+    const column = state.columns.find(col => col.id === columnId);
+    if (!column) return;
+
+    const newCard = {
+        id: "card-" + Date.now(),
+        title,
+        description,
+        priority,           // low, medium, high
+        dueDate,            // "2025-10-03" 
+        createdAt: Date.now()
+    };
+
+    column.tasks.push(newCard);
+    saveState();
+    notify();
+}

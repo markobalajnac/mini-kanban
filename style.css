@@ -489,6 +489,10 @@ body.dark .dropbtn:hover {
 }
 
 .placeholder {
+    display: none;
+}
+
+.placeholder.show {
     height: 100px;
     background-color: var(--color-bg);
     border-radius: 5px;
@@ -538,6 +542,9 @@ body.dark .dropbtn:hover {
     color: var(--color-text);
     font-weight: 700;
     font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .card-item .card-header .card-priority {
@@ -545,7 +552,18 @@ body.dark .dropbtn:hover {
     height: 10px;
     display: block;
     border-radius: 50%;
-    background-color: red;
+}
+
+.card-priority[data-priority="high"] {
+    background-color: rgb(246, 6, 6);
+}
+
+.card-priority[data-priority="medium"] {
+    background-color: rgb(6, 26, 246);
+}
+
+.card-priority[data-priority="low"] {
+    background-color: rgb(19, 226, 8);
 }
 
 #column-add-card .modal-content {
