@@ -173,7 +173,7 @@ body.dark {
     color: var(--color-text);
 }
 
-
+select:focus-visible,
 input:focus-visible,
 .header .search-container #search:active,
 .header .search-container #search:focus-visible {
@@ -505,6 +505,83 @@ body.dark .dropbtn:hover {
     width: 100%;
 }
 
+/* Cards */
+
+
+.card-item {
+    margin: 1rem 0;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    background-color: var(--color-bg);
+}
+
+.card-item .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-item .card-body .card-title {
+    font-weight: 700;
+    color: var(--color-heading);
+    margin-bottom: 10px;
+}
+
+.card-item .card-body .card-description {
+    color: var(--color-text);
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.card-item .card-body .card-due-date {
+    color: var(--color-text);
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.card-item .card-header .card-priority {
+    width: 10px;
+    height: 10px;
+    display: block;
+    border-radius: 50%;
+    background-color: red;
+}
+
+#column-add-card .modal-content {
+    width: 40%;
+}
+
+#column-add-card #cardDescription,
+#column-add-card #cardName {
+    width: 100%;
+}
+
+#column-add-card .priority-date-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#column-add-card .priority-wrapper {
+    width: 50%;
+}
+
+#column-add-card .priority-select {
+    appearance: none;
+    /* remove default style */
+
+    padding: 0.5rem 1rem;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
 
 @media (max-width: 1200px) {
     .main-container {
@@ -520,7 +597,7 @@ body.dark .dropbtn:hover {
         width: 70%;
     }
 
-    .dropdown-content {
+    .sort-dropdown .dropdown-content {
         right: unset;
     }
 
@@ -610,6 +687,11 @@ body.dark .dropbtn:hover {
         transform: translateY(-50%);
         right: 5rem;
     }
+
+    #column-add-card .due-date-wrapper,
+    #column-add-card .priority-wrapper {
+        width: 100%;
+    }
 }
 
 
@@ -642,4 +724,6 @@ body.dark .dropbtn:hover {
     .add-column-btn svg {
         margin-right: 0;
     }
+
+
 }

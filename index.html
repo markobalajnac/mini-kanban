@@ -29,7 +29,7 @@
                         <input type="text" id="search" placeholder="Search tasks..." aria-label="Search tasks" />
                     </div>
                     <div class="sort-container">
-                        <div class="dropdown filter-dropdown">
+                        <div class="dropdown sort-dropdown">
                             <button class="dropbtn" aria-haspopup="true" aria-expanded="false"
                                 aria-label="Filter options">
                                 Sort by
@@ -125,9 +125,12 @@
                 </div>
                 <div class="column-body">
                     <div class="placeholder show">Drop items here</div>
+                    <div class="cards-container">
+
+                    </div>
                 </div>
                 <div class="column-footer">
-                    <button class="add-card-btn" aria-label="Add new card">
+                    <button class="add-card-btn" data-modal-id="column-add-card" aria-label="Add new card">
                         Add Card
                     </button>
                 </div>
@@ -155,15 +158,16 @@
                 </div>
                 <div class="column-body">
                     <div class="placeholder show">Drop items here</div>
+                    <div class="cards-container">
+
+                    </div>
                 </div>
                 <div class="column-footer">
-                    <button class="add-card-btn" aria-label="Add new card">
+                    <button class="add-card-btn" data-modal-id="column-add-card" aria-label="Add new card">
                         Add Card
                     </button>
                 </div>
             </div>
-
-
 
             <div class="column flex-item done">
                 <div class="column-header">
@@ -188,17 +192,18 @@
 
                 <div class="column-body">
                     <div class="placeholder show">Drop items here</div>
+                    <div class="cards-container">
+
+                    </div>
                 </div>
 
                 <div class="column-footer">
-                    <button class="add-card-btn" aria-label="Add new card">
+                    <button class="add-card-btn" data-modal-id="column-add-card" aria-label="Add new card">
                         Add Card
                     </button>
                 </div>
 
             </div>
-
-
         </div>
     </div>
     </div>
@@ -273,6 +278,48 @@
         </div>
     </div>
 
+    <!-- Modal content for Add Cards -->
+
+    <div id="column-add-card" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-wrapper">
+                    <h2 class="modal-title">Add New Card</h2>
+                    <span class="modal-description">Create a new card for this column.</span>
+                </div>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <label for="cardName">Title</label>
+                <input type="text" id="cardName" name="cardName" placeholder="Enter card title">
+
+                <label for="cardDescription">Description</label>
+                <input type="text" id="cardDescription" name="cardDescription" placeholder="Enter card description">
+
+                <div class="priority-date-wrapper">
+                    <div class="priority-wrapper">
+                        <label for="cardPriority">Priority</label>
+                        <select id="cardPriority" class="priority-select" name="cardPriority">
+                            <option value="high">High</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+                    <div class="due-date-wrapper">
+                        <label for="cardDueDate">Due Date</label>
+                        <input type="date" id="cardDueDate" name="cardDueDate" class="date-input">
+                    </div>
+                </div>
+
+                <div class="confirm-buttons">
+                    <button type="button" class="btn cancel">Cancel</button>
+                    <button type="button" class="btn add">Add Card</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Template for Column -->
     <template id="column-template">
         <div class="column flex-item">
@@ -303,6 +350,37 @@
             <div class="column-footer">
                 <button class="add-card-btn" aria-label="Add new card">Add Card</button>
             </div>
+        </div>
+    </template>
+
+    <!-- Template for Card -->
+
+    <template id="card-template">
+        <div class="card-item">
+            <div class="card-header">
+                <span class="card-priority" data-priority=""></span>
+                <div class="card-options">
+                    <div class="dropdown card-dropdown">
+                        <button class="dropbtn" aria-haspopup="true" aria-expanded="false" aria-label="Options menu">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                                <path fill="currentColor" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="1.5"
+                                    d="M12 5.92A.96.96 0 1 0 12 4a.96.96 0 0 0 0 1.92m0 7.04a.96.96 0 1 0 0-1.92a.96.96 0 0 0 0 1.92M12 20a.96.96 0 1 0 0-1.92a.96.96 0 0 0 0 1.92" />
+                            </svg>
+                        </button>
+                        <div class="dropdown-content" role="menu" aria-label="Options">
+                            <a href="#" role="menuitem">Edit</a>
+                            <a href="#" role="menuitem">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="card-title"></div>
+                <div class="card-description"></div>
+                <div class="card-due-date"></div>
+            </div>
+
         </div>
     </template>
 

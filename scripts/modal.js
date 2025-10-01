@@ -24,6 +24,7 @@ const toggleModal = (modalId) => {
 
 const settingsModalBtn = document.querySelector('.settings-modal');
 const addColumnModal = document.querySelector('.add-column-btn');
+const addCardModalBtns = document.querySelectorAll('.add-card-btn');
 
 addColumnModal.addEventListener('click', (e) => {
     toggleModal(e.currentTarget.dataset.modalId)
@@ -31,3 +32,9 @@ addColumnModal.addEventListener('click', (e) => {
 })
 
 settingsModalBtn.addEventListener('click', e => toggleModal(e.currentTarget.classList))
+
+addCardModalBtns.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        toggleModal(e.currentTarget.dataset.modalId)
+    })
+})
