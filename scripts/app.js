@@ -1,5 +1,5 @@
 //Adding Column Template
-import { state, subscribe, addColumn } from './state.js';
+import { state, subscribe, addColumn, removeColumn } from './state.js';
 
 const addColumnInput = document.querySelector('#columnName');
 const addColumntBtn = document.querySelector('#column-add-modal .add');
@@ -23,6 +23,18 @@ const renderBoard = (state) => {
         board.appendChild(clone);
     });
 }
+
+
+/* Remove Column */
+
+board.addEventListener('click', (e) => {
+    if (e.target.matches('.remove-col-btn')) {
+        const col = e.target.closest('.column');
+        const colId = col.dataset.id;
+        removeColumn(colId);
+    }
+
+})
 
 
 subscribe(renderBoard);
