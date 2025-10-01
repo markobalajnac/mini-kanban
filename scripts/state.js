@@ -66,3 +66,9 @@ export function editColumn(columnId, newTitle) {
     column.title = newTitle;
     saveState();
 }
+
+export function clearState() {
+    state = structuredClone(initialState);
+
+    saveState();
+}

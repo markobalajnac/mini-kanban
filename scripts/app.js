@@ -1,5 +1,5 @@
 //Adding Column Template
-import { state, subscribe, addColumn, removeColumn, editColumn } from './state.js';
+import { state, subscribe, addColumn, removeColumn, editColumn, clearState } from './state.js';
 
 
 const columnTemplate = document.querySelector('#column-template')
@@ -98,8 +98,17 @@ const updateColumn = () => {
     });
 }
 
-openModal();
+const resetBoard = () => {
+    const resetBtn = document.querySelector('#reset-board');
+    resetBtn.addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear the board?')) {
+            clearState();
+        }
+    })
+}
 
+resetBoard();
+openModal();
 updateColumn();
 addNewColumn();
 
