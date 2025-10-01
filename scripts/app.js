@@ -1,5 +1,5 @@
 //Adding Column Template
-import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard } from './state.js';
+import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard } from './state.js';
 
 
 const columnTemplate = document.querySelector('#column-template')
@@ -102,6 +102,18 @@ board.addEventListener('click', (e) => {
     }
 
 })
+
+const removeCardItem = () => {
+    board.addEventListener('click', (e) => {
+        if (e.target.matches('.remove-card')) {
+            const colId = e.target.closest('.column').dataset.id;
+            const cardId = e.target.closest('.card-item').dataset.id
+            console.log(colId);
+
+            removeCard(colId, cardId);
+        }
+    })
+}
 
 /* Edit Column */
 
@@ -215,6 +227,7 @@ exportJSON();
 importJSON();
 
 addNewCard();
+removeCardItem();
 
 subscribe(renderBoard);
 renderBoard(state);

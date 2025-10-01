@@ -125,3 +125,14 @@ export function addCard(columnId, title, description, priority = "low", dueDate 
     saveState();
     notify();
 }
+
+export function removeCard(columnId, cardId) {
+    const column = state.columns.find(col => col.id === columnId);
+    if (!column) return;
+
+    column.tasks = column.tasks.filter(task => task.id !== cardId);
+
+    saveState();
+}
+
+
