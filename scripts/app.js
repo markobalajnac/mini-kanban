@@ -28,6 +28,8 @@ const renderBoard = (state) => {
         const clone = columnTemplate.content.cloneNode(true);
         const cloneItem = clone.querySelector('.column');
         const cloneEditBtn = clone.querySelector('.edit-col-btn');
+        const addCardBtn = clone.querySelector('.add-card-btn');
+        addCardBtn.dataset.id = column.id;
         cloneEditBtn.dataset.id = column.id;
         cloneEditBtn.dataset.title = column.title;
         cloneItem.dataset.id = column.id;
@@ -53,23 +55,33 @@ board.addEventListener('click', (e) => {
 const openModal = () => {
     board.addEventListener('click', (e) => {
         const editBtn = e.target.closest('.edit-col-btn');
-        if (!editBtn) return; // ako nije klik na dugme za edit, izlazi
+        if (!editBtn) return;
 
         const modalId = editBtn.dataset.modalId;
         const id = editBtn.dataset.id;
         const title = editBtn.dataset.title;
 
-        // pripremi modal za edit
+
         const modal = document.getElementById(modalId);
         const input = modal.querySelector('input');
         const addBtn = modal.querySelector('.add');
 
         input.value = title;
         addBtn.textContent = 'Save';
-        modal.dataset.mode = 'edit';       // <-- dodaj ovo
+        modal.dataset.mode = 'edit';
         modal.dataset.currentId = id;
 
-        // otvori modal
+        toggleModal(modalId);
+    });
+}
+
+const openAddCardModals = () => {
+    board.addEventListener('click', (e) => {
+        const addCardBtn = e.target.closest('.add-card-btn');
+        if (!addCardBtn) return; // ako nije klik na dugme za edit, izlazi
+
+        const modalId = addCardBtn.dataset.modalId;
+
         toggleModal(modalId);
     });
 }
@@ -118,14 +130,15 @@ const importJSON = () => {
     const importInput = document.querySelector('.import-data input');
     importInput.addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
-            importBoard(e.target.files[0]);  // učitavamo izabrani fajl
-            e.target.value = '';             // reset input za sledeći import
+            importBoard(e.target.files[0]);
+            e.target.value = '';
         }
     });
 }
 
 resetBoard();
 openModal();
+openAddCardModals();
 addNewColumn();
 updateColumn();
 exportJSON();

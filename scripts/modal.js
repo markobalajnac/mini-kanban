@@ -26,6 +26,9 @@ const settingsModalBtn = document.querySelector('.settings-modal');
 const addColumnModal = document.querySelector('.add-column-btn');
 const addCardModalBtns = document.querySelectorAll('.add-card-btn');
 
+const columnsWrapper = document.querySelector('.columns-wrapper');
+
+
 addColumnModal.addEventListener('click', (e) => {
 
     const modal = document.getElementById(e.currentTarget.dataset.modalId);
@@ -43,8 +46,4 @@ addColumnModal.addEventListener('click', (e) => {
 
 settingsModalBtn.addEventListener('click', e => toggleModal(e.currentTarget.classList))
 
-addCardModalBtns.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-        toggleModal(e.currentTarget.dataset.modalId)
-    })
-})
+
