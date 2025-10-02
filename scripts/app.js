@@ -311,6 +311,43 @@ const filterCardsByColumn = () => {
     });
 }
 
+const search = () => {
+    const searchInput = document.getElementById('search');
+
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+
+        const filteredColumns = state.columns.map(col => {
+
+            const filteredTasks = col.tasks.filter(task => {
+                return task.title.toLowerCase().includes(query) ||
+                    task.description.toLowerCase().includes(query) ||
+                    task.priority.toLowerCase().includes(query);
+            });
+            return { ...col, tasks: filteredTasks };
+        });
+
+
+        renderBoard({ columns: filteredColumns });
+    });
+}
+
+
+const filterByPriority = () => {
+    const filterSelect = document.getElementById('filterPriority');
+
+    filterSelect.addEventListener('change', (e) => {
+        const selected = e.target.value;
+
+        const filteredColumns = state.columns.map(col => {
+            if (selected === 'default') return col;
+            const filteredTasks = col.tasks.filter(task => task.priority === selected);
+            return { ...col, tasks: filteredTasks };
+        });
+
+        renderBoard({ columns: filteredColumns });
+    });
+}
 resetBoard();
 
 openModal();
@@ -329,6 +366,10 @@ exportJSON();
 importJSON();
 
 removeCardItem();
+
+search();
+
+filterByPriority();
 
 subscribe(renderBoard);
 renderBoard(state);

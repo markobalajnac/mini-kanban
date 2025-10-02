@@ -419,7 +419,10 @@ div[contenteditable="true"]:hover {
     max-height: 600px;
     overflow-y: auto;
     flex: 1;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-bg);
 }
+
 
 .column-body:has(.placeholder.show) {
     display: flex;
