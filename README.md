@@ -22,10 +22,10 @@ The app behaves as a **Single Page Application (SPA)** – all updates happen wi
 1.  (Node.js + live-server):
    ```bash
 npm install -g live-server
-cd path\to\project\mini-kanban-main
+cd path\to\project\mini-kanban-main```
 2.  (Python):
    ```bash
 cd path\to\project\mini-kanban-main
 python -m http.server 5500
-Open in browser http://localhost:5500
+Open in browser http://localhost:5500```
 
