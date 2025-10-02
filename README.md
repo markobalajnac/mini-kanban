@@ -19,13 +19,17 @@ The app behaves as a **Single Page Application (SPA)** – all updates happen wi
 - **index.html / style.css** – semantic HTML and responsive, modern CSS design  
 
 ## How to Run
-1.  (Node.js + live-server):
+1.  **Node.js + live-server**
    ```bash
 npm install -g live-server
-cd path\to\project\mini-kanban-main```
-2.  (Python):
+cd path\to\project\mini-kanban-main
+```
+
+2.  **Python 3 local server**
    ```bash
 cd path\to\project\mini-kanban-main
 python -m http.server 5500
-Open in browser http://localhost:5500```
+```
+Open in browser http://localhost:5500
+
 
