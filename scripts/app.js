@@ -27,6 +27,7 @@ const renderBoard = (state) => {
         const cloneItem = clone.querySelector('.column');
         const cloneEditBtn = clone.querySelector('.edit-col-btn');
         const addCardBtn = clone.querySelector('.add-card-btn');
+
         addCardBtn.dataset.id = column.id;
         cloneEditBtn.dataset.id = column.id;
         cloneEditBtn.dataset.title = column.title;
@@ -48,6 +49,8 @@ const renderBoard = (state) => {
             cloneEditCardBtn.dataset.dueDate = task.dueDate;
 
             cardEl.dataset.id = task.id;
+            cardClone.querySelector('.card-title').setAttribute('contenteditable', true); //inline edit
+            cardClone.querySelector('.card-description').setAttribute('contenteditable', true)
             cardClone.querySelector('.card-title').textContent = task.title;
             cardClone.querySelector('.card-description').textContent = task.description;
             cardClone.querySelector('.card-priority').dataset.priority = `${task.priority}`;
@@ -262,6 +265,35 @@ function updatePlaceholders() {
     });
 }
 
+const inlineEditCard = () => {
+    board.addEventListener('blur', (e) => {
+        const editable = e.target.closest('[contenteditable="true"]');
+        if (!editable) return;
+
+        const card = editable.closest('.card-item');
+        const cardId = card.dataset.id;
+        const columnId = card.closest('.column').dataset.id;
+
+        const newData = {
+            title: card.querySelector('.card-title')?.textContent,
+            description: card.querySelector('.card-description')?.textContent
+        };
+
+        editCard(columnId, cardId, newData);
+    }, true);
+
+    board.addEventListener('keydown', (e) => {
+        const editable = e.target.closest('[contenteditable="true"]');
+        if (!editable) return;
+
+        if (e.key === "Enter") {
+            e.preventDefault(); // dont go to new line
+            editable.blur();
+        }
+    });
+
+}
+
 resetBoard();
 
 openModal();
@@ -269,6 +301,7 @@ openAddCardModals();
 openEditCardModal();
 
 addOrUpdateCard();
+inlineEditCard();
 
 addNewColumn();
 updateColumn();

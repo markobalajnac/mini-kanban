@@ -173,12 +173,22 @@ body.dark {
     color: var(--color-text);
 }
 
+div[contenteditable="true"]:focus-visible,
 select:focus-visible,
 input:focus-visible,
 .header .search-container #search:active,
 .header .search-container #search:focus-visible {
     border-color: var(--color-heading);
     outline: none;
+}
+
+div[contenteditable="true"] {
+    cursor: copy;
+    transition: all 0.3s ease;
+}
+
+div[contenteditable="true"]:hover {
+    text-decoration: underline;
 }
 
 .header .theme-switch-container {
@@ -603,6 +613,8 @@ body.dark .dropbtn:hover {
     transition: all 0.3s ease;
     width: 100%;
 }
+
+
 
 
 @media (max-width: 1200px) {
