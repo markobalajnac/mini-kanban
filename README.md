@@ -19,11 +19,13 @@ The app behaves as a **Single Page Application (SPA)** – all updates happen wi
 - **index.html / style.css** – semantic HTML and responsive, modern CSS design  
 
 ## How to Run
-1. **Clone via Git**
+1.  (Node.js + live-server):
    ```bash
-   git clone https://github.com/markobalajnac/mini-kanban.git
-   cd mini-kanban
-Then open index.html in any modern browser (Chrome, Firefox, Edge).
-2.	ZIP download
-Download the project as a ZIP file, extract it, and open index.html in your browser.
-No server required – everything runs locally in the browser.
+npm install -g live-server
+cd path\to\project\mini-kanban-main
+2.  (Python):
+   ```bash
+cd path\to\project\mini-kanban-main
+python -m http.server 5500
+Open in browser http://localhost:5500
+
