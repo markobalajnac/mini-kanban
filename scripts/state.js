@@ -135,4 +135,20 @@ export function removeCard(columnId, cardId) {
     saveState();
 }
 
+export function editCard(columnId, taskId, newData) {
+    const column = state.columns.find(col => col.id === columnId);
+    if (!column) return;
+
+    const task = column.tasks.find(t => t.id === taskId);
+    if (!task) return;
+
+    // update polja
+    task.title = newData.title ?? task.title;
+    task.description = newData.description ?? task.description;
+    task.priority = newData.priority ?? task.priority;
+    task.dueDate = newData.dueDate ?? task.dueDate;
+
+    saveState();
+}
+
 

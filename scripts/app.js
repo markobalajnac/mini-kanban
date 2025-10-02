@@ -1,18 +1,10 @@
 //Adding Column Template
-import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard } from './state.js';
+import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard, editCard } from './state.js';
 
 
 const columnTemplate = document.querySelector('#column-template')
 const cardTemplate = document.querySelector('#card-template');
 const board = document.querySelector('.columns-wrapper');
-const addCardModal = document.querySelector('#column-add-card')
-
-
-
-
-// console.log(addColumnInput);
-// console.log(addColumntBtn);
-
 
 
 const addNewColumn = () => {
@@ -27,33 +19,6 @@ const addNewColumn = () => {
     })
 }
 
-const addNewCard = () => {
-    const saveCardBtn = document.querySelector('#column-add-card .add');
-    const cardDescInput = document.querySelector('#cardDescription');
-    const cardTitleInput = document.querySelector('#cardName');
-    const cardPriorityInput = document.querySelector('#cardPriority');
-    const cardDueInput = document.querySelector('#cardDueDate');
-
-    saveCardBtn.addEventListener('click', () => {
-        const title = cardTitleInput.value.trim();
-        const description = cardDescInput.value.trim();
-        const priority = cardPriorityInput.value;
-        const dueDate = cardDueInput.value;
-        const currentColumnId = addCardModal.dataset.id;
-
-        if (!title) return; // obavezno polje
-
-        addCard(currentColumnId, title, description, priority, dueDate);
-
-        addCardModal.classList.remove('active'); // zatvori modal
-        cardTitleInput.value = '';
-        cardDescInput.value = '';
-        cardPriorityInput.value = 'low';
-        cardDueInput.value = '';
-
-    })
-
-}
 
 const renderBoard = (state) => {
     board.innerHTML = '';
@@ -74,6 +39,13 @@ const renderBoard = (state) => {
         column.tasks.forEach(task => {
             const cardClone = cardTemplate.content.cloneNode(true);
             const cardEl = cardClone.querySelector('.card-item');
+
+            const cloneEditCardBtn = cardClone.querySelector('.edit-card');
+            cloneEditCardBtn.dataset.id = task.id;
+            cloneEditCardBtn.dataset.title = task.title;
+            cloneEditCardBtn.dataset.description = task.description;
+            cloneEditCardBtn.dataset.priority = task.priority;
+            cloneEditCardBtn.dataset.dueDate = task.dueDate;
 
             cardEl.dataset.id = task.id;
             cardClone.querySelector('.card-title').textContent = task.title;
@@ -140,17 +112,90 @@ const openModal = () => {
     });
 }
 
+const openEditCardModal = () => {
+    board.addEventListener('click', (e) => {
+        const editBtn = e.target.closest('.edit-card');
+        if (!editBtn) return;
+
+        const columnId = e.target.closest('.column').dataset.id;
+        const modal = document.getElementById(editBtn.dataset.modalId);
+
+        // add values to modal
+        modal.querySelector('#cardName').value = editBtn.dataset.title;
+        modal.querySelector('#cardDescription').value = editBtn.dataset.description;
+        modal.querySelector('#cardPriority').value = editBtn.dataset.priority;
+        modal.querySelector('#cardDueDate').value = editBtn.dataset.dueDate;
+
+        // dataset mode and columnID
+        modal.dataset.mode = 'edit';
+        modal.dataset.currentId = editBtn.dataset.id;
+        modal.dataset.columnId = columnId;
+
+        modal.querySelector('.add').textContent = 'Save';
+
+        toggleModal(editBtn.dataset.modalId);
+    });
+};
+
+
 const openAddCardModals = () => {
     board.addEventListener('click', (e) => {
         const addCardBtn = e.target.closest('.add-card-btn');
-        if (!addCardBtn) return; // stop 
+        if (!addCardBtn) return;
 
-        addCardModal.dataset.id = addCardBtn.dataset.id; // get id from column
-        const modalId = addCardBtn.dataset.modalId;
+        const modal = document.getElementById(addCardBtn.dataset.modalId);
 
-        toggleModal(modalId);
+
+        modal.dataset.columnId = addCardBtn.dataset.id;
+
+        // Reset inputs
+        modal.querySelector('#cardName').value = '';
+        modal.querySelector('#cardDescription').value = '';
+        modal.querySelector('#cardPriority').value = 'medium';
+        modal.querySelector('#cardDueDate').value = '';
+
+        const saveBtn = modal.querySelector('.add');
+        saveBtn.textContent = 'Add Card';
+
+        modal.dataset.mode = 'Add';
+        modal.dataset.currentId = '';
+
+        toggleModal(addCardBtn.dataset.modalId);
     });
-}
+};
+
+const addOrUpdateCard = () => {
+    const modal = document.getElementById('column-add-card');
+    const saveBtn = modal.querySelector('.add');
+
+    saveBtn.addEventListener('click', () => {
+        const title = modal.querySelector('#cardName').value.trim();
+        const description = modal.querySelector('#cardDescription').value.trim();
+        const priority = modal.querySelector('#cardPriority').value;
+        const dueDate = modal.querySelector('#cardDueDate').value;
+        const columnId = modal.dataset.columnId;
+
+        if (!title) return;
+
+        if (modal.dataset.mode === 'Add') {
+            addCard(columnId, title, description, priority, dueDate);
+        } else if (modal.dataset.mode === 'edit') {
+            editCard(columnId, modal.dataset.currentId, { title, description, priority, dueDate });
+        }
+
+        // Reset modal
+        modal.dataset.mode = '';
+        modal.dataset.currentId = '';
+        modal.dataset.columnId = '';
+        modal.querySelector('#cardName').value = '';
+        modal.querySelector('#cardDescription').value = '';
+        modal.querySelector('#cardPriority').value = 'medium';
+        modal.querySelector('#cardDueDate').value = '';
+        saveBtn.textContent = 'Add Card';
+        modal.classList.remove('active');
+    });
+};
+
 
 const updateColumn = () => {
     const modalAdd = document.getElementById('column-add-modal');
@@ -218,15 +263,19 @@ function updatePlaceholders() {
 }
 
 resetBoard();
+
 openModal();
 openAddCardModals();
+openEditCardModal();
+
+addOrUpdateCard();
+
 addNewColumn();
 updateColumn();
 
 exportJSON();
 importJSON();
 
-addNewCard();
 removeCardItem();
 
 subscribe(renderBoard);
