@@ -1,5 +1,5 @@
 //Adding Column Template
-import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard, editCard, sortColumn } from './state.js';
+import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard, editCard, sortColumn, moveCardToColumn } from './state.js';
 
 
 const columnTemplate = document.querySelector('#column-template')
@@ -49,6 +49,11 @@ const renderBoard = (state) => {
             cloneEditCardBtn.dataset.dueDate = task.dueDate;
 
             cardEl.dataset.id = task.id;
+
+            // for D&D
+            cardEl.dataset.columnId = column.id;
+            cardEl.setAttribute('draggable', 'true');
+
             cardClone.querySelector('.card-title').setAttribute('contenteditable', true); //inline edit
             cardClone.querySelector('.card-description').setAttribute('contenteditable', true)
             cardClone.querySelector('.card-title').textContent = task.title;
@@ -348,6 +353,99 @@ const filterByPriority = () => {
         renderBoard({ columns: filteredColumns });
     });
 }
+
+const dragAndDrop = () => {
+    board.addEventListener('dragstart', (e) => {
+        const card = e.target.closest('.card-item');
+        if (!card) return;
+
+        e.dataTransfer.setData('text/plain', JSON.stringify({
+            cardId: card.dataset.id,
+            fromColumnId: card.dataset.columnId
+        }));
+
+        card.classList.add('dragging');
+    });
+
+    board.addEventListener('dragover', (e) => {
+        const column = e.target.closest('.column');
+        if (!column) return;
+
+        e.preventDefault();
+        column.classList.add('drag-over');
+    });
+
+    board.addEventListener('dragleave', (e) => {
+        const column = e.target.closest('.column');
+        if (!column) return;
+        column.classList.remove('drag-over');
+    });
+
+    board.addEventListener('drop', (e) => {
+        const column = e.target.closest('.column');
+        if (!column) return;
+
+        e.preventDefault();
+        column.classList.remove('drag-over');
+
+        const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+        const { cardId, fromColumnId } = data;
+        const toColumnId = column.dataset.id;
+
+        if (fromColumnId === toColumnId) return;
+
+        // Move card in state.js
+        moveCardToColumn(cardId, toColumnId);
+        renderBoard(state);
+
+    });
+
+    board.addEventListener('dragend', (e) => {
+        const card = e.target.closest('.card-item');
+        if (!card) return;
+        card.classList.remove('dragging');
+    });
+};
+
+const dragAndDropMobile = () => {
+    let draggedCard = null;
+
+    board.addEventListener('touchstart', (e) => {
+        const card = e.target.closest('.card-item');
+        if (!card) return;
+        draggedCard = card;
+        card.classList.add('dragging');
+    });
+
+    board.addEventListener('touchmove', (e) => {
+        if (!draggedCard) return;
+        const touch = e.touches[0];
+        draggedCard.style.position = 'absolute';
+        draggedCard.style.top = touch.clientY + 'px';
+        draggedCard.style.left = touch.clientX + 'px';
+        draggedCard.style.zIndex = 1000;
+    });
+
+    board.addEventListener('touchend', (e) => {
+        if (!draggedCard) return;
+
+        // find the touched column
+        const touch = e.changedTouches[0];
+        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+        const column = dropTarget.closest('.column');
+        if (column) {
+            moveCardToColumn(draggedCard.dataset.id, column.dataset.id);
+        }
+
+        // reset styles
+        draggedCard.style.position = '';
+        draggedCard.style.top = '';
+        draggedCard.style.left = '';
+        draggedCard.style.zIndex = '';
+        draggedCard.classList.remove('dragging');
+        draggedCard = null;
+    });
+}
 resetBoard();
 
 openModal();
@@ -370,6 +468,9 @@ removeCardItem();
 search();
 
 filterByPriority();
+
+dragAndDrop();
+dragAndDropMobile();
 
 subscribe(renderBoard);
 renderBoard(state);

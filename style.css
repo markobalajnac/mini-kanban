@@ -610,6 +610,7 @@ body.dark .dropbtn:hover {
     width: 50%;
 }
 
+select,
 #column-add-card .priority-select {
     appearance: none;
     /* remove default style */
@@ -623,7 +624,16 @@ body.dark .dropbtn:hover {
     width: 100%;
 }
 
+.card-item.dragging {
+    opacity: 0.5;
+    /* ghost efekt */
+    transform: scale(0.90);
+}
 
+.column.drag-over {
+    background-color: var(--color-bg);
+    border: 2px dashed var(--color-border);
+}
 
 
 @media (max-width: 1200px) {

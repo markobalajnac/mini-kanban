@@ -179,4 +179,28 @@ export function sortColumn(columnId, criteria, order) {
     saveState();
 }
 
+export function moveCardToColumn(cardId, newColumnId) {
+    let cardData = null;
+
+    // Find and remove card from old column
+    state.columns.forEach(col => {
+        const index = col.tasks.findIndex(c => c.id === cardId);
+        if (index !== -1) {
+            cardData = col.tasks.splice(index, 1)[0];
+        }
+    });
+
+    if (!cardData) return;
+
+    // insert in new column
+    const newCol = state.columns.find(c => c.id === newColumnId);
+    if (!newCol) return;
+
+    cardData.columnId = newColumnId;
+    newCol.tasks.push(cardData);
+
+    saveState();
+
+}
+
 
