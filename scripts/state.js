@@ -151,4 +151,32 @@ export function editCard(columnId, taskId, newData) {
     saveState();
 }
 
+export function sortColumn(columnId, criteria, order) {
+    const column = state.columns.find(c => c.id === columnId);
+    if (!column) return;
+
+    column.tasks.sort((a, b) => {
+        let valA = a[criteria];
+        let valB = b[criteria];
+
+        // Ako je datum, pretvori u timestamp radi lakšeg poređenja
+        if (criteria === 'dueDate' || criteria === 'createdAt') {
+            valA = valA ? new Date(valA).getTime() : 0;
+            valB = valB ? new Date(valB).getTime() : 0;
+        }
+
+        if (criteria === 'priority') {
+            const map = { low: 1, medium: 2, high: 3 };
+            valA = map[valA] || 0;
+            valB = map[valB] || 0;
+        }
+
+        if (valA < valB) return order === 'asc' ? -1 : 1;
+        if (valA > valB) return order === 'asc' ? 1 : -1;
+        return 0;
+    });
+
+    saveState();
+}
+
 

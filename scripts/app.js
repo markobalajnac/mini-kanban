@@ -1,5 +1,5 @@
 //Adding Column Template
-import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard, editCard } from './state.js';
+import { state, subscribe, addColumn, removeColumn, editColumn, clearState, exportBoard, importBoard, addCard, removeCard, editCard, sortColumn } from './state.js';
 
 
 const columnTemplate = document.querySelector('#column-template')
@@ -294,6 +294,23 @@ const inlineEditCard = () => {
 
 }
 
+const filterCardsByColumn = () => {
+    board.addEventListener('click', (e) => {
+        const sortBtn = e.target.closest('.sort-option');
+        if (!sortBtn) return;
+
+        const column = sortBtn.closest('.column');
+        const colId = column.dataset.id;
+
+        const sort = sortBtn.dataset.sort;
+        const direction = sortBtn.dataset.direction;
+
+        console.log('Sortiram kolonu:', colId, sort, direction);
+        sortColumn(colId, sort, direction);
+
+    });
+}
+
 resetBoard();
 
 openModal();
@@ -305,6 +322,8 @@ inlineEditCard();
 
 addNewColumn();
 updateColumn();
+
+filterCardsByColumn();
 
 exportJSON();
 importJSON();
